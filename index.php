@@ -70,21 +70,15 @@ $maturin->whatYourName($george);
 $bigfoot->set_tribe($george->get_tribe());
 $bigfoot->whatYourName($george);
 hr();
-$georgerpg= new Yetirpg("george");
-//var_dump($georgerpg);
-//var_dump( Yetirpg::get_array());
-new Yetirpg('tom');
-new Yetirpg("alex");
-new Yetirpg("robert");
-//var_dump(Yetirpg::get_array());
-$georgerpg->get_status();
-Yetirpg::listAlive();
-
-var_dump(Yetirpg::listAlive());
-
-
-
-    ?>
+$george=new Yetirpg('george');
+$maturin = new Yetirpg('maturin');
+$garbu = new Yetirpg('garbu');
+$bigfoot = new Yetirpg('bigfoot');
+$toto = new Yetirpg('toto');
+// 4. mélanger le tableau
+shuffle(Yetirpg::listAlive());
+$george->attaquer();
+?>
 </body>
 
 </html>

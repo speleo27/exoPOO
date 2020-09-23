@@ -73,15 +73,17 @@ class Yetirpg{
             return $this->status = self::BAD_HEALTH;
         }
     }
+    public function what_status(){return $this->status;}
+
     //affichage de l'état
     public function get_status(){
-        switch($this->status){
+        switch($this->what_status()){
             case self::MEDIUM_HEALTH:
-                echo " La santé de votre yéti est passer a ".$this->status."</br>";
+                echo " La santé de votre yéti est passer a moyenne</br>";
             break;
 
             case self::BAD_HEALTH:
-                echo " La santé de votre yéti est passer a " . $this->status."</br>";
+                echo " La santé de votre yéti est passer a très basse sa craint</br>";
                 break;
             
             default:
@@ -130,11 +132,18 @@ class Yetirpg{
     // on attaque le combat
     public function se_defendre($attaquant){
         echo" un combat épique entre ".$this->get_name()." et ".$attaquant->get_name()."viens de commencer</br>" ;
-        return $this->set_life($newlife) = $attaquant->get_force()- $this->get_robustesse();
+        return $this->set_life($attaquant->get_force() - $this->get_robustesse()) ;
     }
-    public function attaquer($yeti){
-         array_rand(self::listAlive());
-        
+    public function attaquer(){
+        $yeti= self::listAlive();
+        do{
+        $tirage=rand(0,count(self::listAlive())-1);
+        $defenseur= $yeti[$tirage];
+        }while($this==$defenseur);
+
+     //$yeti= array_rand(self::listAlive());
+       // $yeti[0]->se_defendre($this);  
+    echo "Combat va débuter entre ".$this->get_name()." et ".$defenseur->get_name();
     }
   
 
