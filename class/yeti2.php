@@ -14,14 +14,14 @@ class Yetirpg{
    
 
     public function __construct($name)
-    {
-        $this->name=$name;
-        $this->force= rand(3,10);
-        $this->robustesse=rand((10-$this->force - 3),7);
-        $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2));
-        $this->life= $this->life_max;
-
+    {   $allYeti=array_push(
+        $this->name=$name,
+        $this->force= rand(3,10),
+        $this->robustesse=rand((10-$this->force - 3),7),
+        $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2)),
+        $this->life= $this->life_max);
         echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène";
+        
     }
     public function set_life($life){
         $this->life=$this->life_max - $life;
@@ -69,7 +69,6 @@ class Yetirpg{
     //affichage de l'état
     public function get_status(){
         switch($this->status){
-        
             case self::MEDIUM_HEALTH:
                 echo " La santé de votre yéti est passer a ".$this->status."</br>";
             break;
@@ -93,14 +92,5 @@ class Yetirpg{
     }
    
 };
-
-
-
-
-
-
-
-
-
 
 ?>

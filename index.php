@@ -71,7 +71,7 @@ $bigfoot->set_tribe($george->get_tribe());
 $bigfoot->whatYourName($george);
 hr();
 $georgerpg= new Yetirpg("george");
-
+var_dump($georgerpg);
 
 
 
