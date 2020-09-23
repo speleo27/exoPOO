@@ -17,20 +17,18 @@ class Yetirpg{
 
     public function __construct($name)
     {
-        
-        
         $this->name=ucfirst($name);
         $this->force= rand(3,10);
         $this->robustesse=rand((10-$this->force - 3),7);
         $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2));
         $this->life= $this->life_max;
-        //$this->status= $this->set_status();
+        $this->status= $this->get_status();
         echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène
         il possede une santé de ".$this->get_life()."</br>";
         
-        array_push(self::$allYeti,$this);
-        
+        array_push(self::$allYeti,$this);   
     }
+
     public function set_life($newlife){
         $this->life=$newlife;
         echo "le yéti".ucfirst($this->get_name())." vient de passer a ".$this->get_life()."</br>";
