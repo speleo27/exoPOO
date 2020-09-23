@@ -22,7 +22,8 @@ class Yetirpg{
         $this->robustesse=rand((10-$this->force - 3),7);
         $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2));
         $this->life= $this->life_max;
-        echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène";
+        $this->status= $this->set_status();
+        echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène</br>";
         array_push(self::$allYeti,$this);
         
     }
@@ -40,7 +41,7 @@ class Yetirpg{
     public function get_force(){
         if($this->status==self::BAD_HEALTH)
         {
-            return $this->force ;
+            return $this->force = $this->force * self::$allYeti->listAlive();
         }
             return $this->force;
     }
@@ -56,11 +57,11 @@ class Yetirpg{
     
     // set de l'état
     public function set_status(){
-        if($this->get_life > ($this->life_max *(60/100)))
+        if($this->get_life() > ($this->life_max *(60/100)))
         {
             return $this->status= self::GOOD_HEALTH;
         }
-        elseif($this->get_life <= ($this->life_max * (60 / 100))or $this->get_life >= $this->life_max * (30/ 100))
+        elseif($this->get_life() <= ($this->life_max * (60 / 100))or $this->get_life >= $this->life_max * (30/ 100))
         {
             return $this->status = self::MEDIUM_HEALTH;
         }
@@ -97,9 +98,29 @@ class Yetirpg{
     }
     // remplir le tableau
   
-    public function get_array(){
+    public static function get_array(){
+        
         return self::$allYeti;
     }
+    public static function listAlive()
+        {
+            $compteur=0
+            echo "<ul>";
+            foreach(self::$allYeti as $yeti)
+            {
+          
+                if($yeti->life != self::DIE){
+                echo "<li>" .$yeti->name."</li>";
+                $compteur ++ ;
+                    return $compteur;
+            }
+            echo'</ul>';
+        }
+
+    }
+    /*public function se_defendre($attaquant,){
+
+    }*/
   
 
     

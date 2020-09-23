@@ -71,9 +71,14 @@ $bigfoot->set_tribe($george->get_tribe());
 $bigfoot->whatYourName($george);
 hr();
 $georgerpg= new Yetirpg("george");
-var_dump($georgerpg);
-echo Yeti::get_array();
-
+//var_dump($georgerpg);
+//var_dump( Yetirpg::get_array());
+new Yetirpg('tom');
+new Yetirpg("alex");
+new Yetirpg("robert");
+//var_dump(Yetirpg::get_array());
+$georgerpg->get_status();
+Yetirpg::listAlive();
 
 
 
