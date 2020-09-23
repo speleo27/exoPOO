@@ -4,6 +4,8 @@ class Yetirpg{
 
     public static $allYeti=array();
     public static $alive=1;
+ 
+
     const GOOD_HEALTH= 3;
     const MEDIUM_HEALTH= 2;
     const BAD_HEALTH=1;
@@ -27,13 +29,14 @@ class Yetirpg{
         array_push(self::$allYeti,$this);
         
     }
-    public function set_life($life){
-        $this->life=$this->life - $life;
+    public function set_life($newlife){
+        $this->life=$newlife;
         echo "le yéti".ucfirst($this->get_name())." vient de passer a ".$this->life."</br>";
       
         if($this->get_alive() == self::DIE){
             echo "Le Yéti" . ucfirst($this->get_name()) . " à malheureusement succomber</br>";
         }
+        $this->set_status();
         return $this->life;
     }
     public function get_name(){ return $this->name;}
@@ -104,31 +107,34 @@ class Yetirpg{
     }
     public static function listAlive()
         {
-            $compteur=0;
-            $yetialive=array();
+        $yetialive = array();
+         
             echo "<ul>";
             foreach(self::$allYeti as $yeti)
             {
           
                 if($yeti->life != self::DIE){
                 echo "<li>" .$yeti->name."</li>";
-                $compteur ++ ;
-                array_push($yetialive,$yeti->name);
+               
+                array_push($yetialive,$yeti);
                     
             }
             
             echo'</ul>';
         }
 
-        return $compteur;
+        return $yetialive;
 
     }
 
     // on attaque le combat
     public function se_defendre($attaquant){
-
-        echo" un combat épique entre ".$this->name." et ".$attaquant->name."viens de commencer</br>" ;
-        return $this->life= $attaquant->get_force()- $this->robustesse;
+        echo" un combat épique entre ".$this->get_name()." et ".$attaquant->get_name()."viens de commencer</br>" ;
+        return $this->set_life($newlife) = $attaquant->get_force()- $this->get_robustesse();
+    }
+    public function attaquer($yeti){
+         array_rand(self::listAlive());
+        
     }
   
 

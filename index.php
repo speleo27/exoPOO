@@ -80,7 +80,7 @@ new Yetirpg("robert");
 $georgerpg->get_status();
 Yetirpg::listAlive();
 
-
+var_dump(Yetirpg::listAlive());
 
 
 
