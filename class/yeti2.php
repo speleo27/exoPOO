@@ -22,10 +22,10 @@ class Yetirpg{
         $this->robustesse=rand((10-$this->force - 3),7);
         $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2));
         $this->life= $this->life_max;
-        $this->status= $this->get_status();
+        
         echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène
         il possede une santé de ".$this->get_life()."</br>";
-        
+        $this->set_status();
         array_push(self::$allYeti,$this);   
     }
 
@@ -62,16 +62,17 @@ class Yetirpg{
     public function set_status(){
         if($this->get_life() > ($this->life_max *(60/100)))
         {
-            return $this->status= self::GOOD_HEALTH;
+             $this->status= self::GOOD_HEALTH;
         }
         elseif($this->get_life() <= ($this->life_max * (60 / 100))or $this->get_life() >= $this->life_max * (30/ 100))
         {
-            return $this->status = self::MEDIUM_HEALTH;
+            $this->status = self::MEDIUM_HEALTH;
         }
         else
         {
-            return $this->status = self::BAD_HEALTH;
+            $this->status = self::BAD_HEALTH;
         }
+        
     }
     public function what_status(){return $this->status;}
 
