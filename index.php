@@ -72,7 +72,7 @@ $bigfoot->whatYourName($george);
 hr();
 $georgerpg= new Yetirpg("george");
 var_dump($georgerpg);
-
+echo Yeti::get_array();
 
 
 

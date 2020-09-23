@@ -14,19 +14,22 @@ class Yetirpg{
    
 
     public function __construct($name)
-    {   $allYeti=array_push(
-        $this->name=$name,
-        $this->force= rand(3,10),
-        $this->robustesse=rand((10-$this->force - 3),7),
-        $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2)),
-        $this->life= $this->life_max);
+    {
+        
+        
+        $this->name=$name;
+        $this->force= rand(3,10);
+        $this->robustesse=rand((10-$this->force - 3),7);
+        $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2));
+        $this->life= $this->life_max;
         echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène";
+        array_push(self::$allYeti,$this);
         
     }
     public function set_life($life){
-        $this->life=$this->life_max - $life;
+        $this->life=$this->life - $life;
         echo "le yéti".ucfirst($this->get_name())." vient de passer a ".$this->life."</br>";
-        return $this->life;
+      
         if($this->get_alive() == self::DIE){
             echo "Le Yéti" . ucfirst($this->get_name()) . " à malheureusement succomber</br>";
         }
@@ -78,19 +81,28 @@ class Yetirpg{
                 break;
             
             default:
-            return $this->status;
+
+            echo "le Yéti est en bon état";
         }
     }
     // afficher si vivant ou mort
     public function get_alive(){
-        if($this->get_life != 0){
-            return $alive= self::ALIVE;
+        if($this->get_life() != 0){
+            return  self::ALIVE;
         }
         else{
-            return $alive= self::DIE;
+
+            return  self::DIE;
         }
     }
-   
+    // remplir le tableau
+  
+    public function get_array(){
+        return self::$allYeti;
+    }
+  
+
+    
 };
 
 ?>
