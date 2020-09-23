@@ -4,9 +4,9 @@ class Yetirpg{
 
     public static $allYeti=array();
     public static $alive=1;
-    const GOOD_HEALTH= 2;
-    const MEDIUM_HEALTH= 1;
-    const BAD_HEALTH=0;
+    const GOOD_HEALTH= 3;
+    const MEDIUM_HEALTH= 2;
+    const BAD_HEALTH=1;
 
     const ALIVE=1;
     const DIE=0;
@@ -22,7 +22,7 @@ class Yetirpg{
         $this->robustesse=rand((10-$this->force - 3),7);
         $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2));
         $this->life= $this->life_max;
-        $this->status= $this->set_status();
+        //$this->status= $this->set_status();
         echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène</br>";
         array_push(self::$allYeti,$this);
         
@@ -41,7 +41,7 @@ class Yetirpg{
     public function get_force(){
         if($this->status==self::BAD_HEALTH)
         {
-            return $this->force = $this->force * self::$allYeti->listAlive();
+            return $this->force = $this->force * count(self::listAlive());
         }
             return $this->force;
     }
@@ -104,7 +104,8 @@ class Yetirpg{
     }
     public static function listAlive()
         {
-            $compteur=0
+            $compteur=0;
+            $yetialive=array();
             echo "<ul>";
             foreach(self::$allYeti as $yeti)
             {
@@ -112,15 +113,23 @@ class Yetirpg{
                 if($yeti->life != self::DIE){
                 echo "<li>" .$yeti->name."</li>";
                 $compteur ++ ;
-                    return $compteur;
+                array_push($yetialive,$yeti->name);
+                    
             }
+            
             echo'</ul>';
         }
 
-    }
-    /*public function se_defendre($attaquant,){
+        return $compteur;
 
-    }*/
+    }
+
+    // on attaque le combat
+    public function se_defendre($attaquant){
+
+        echo" un combat épique entre ".$this->name." et ".$attaquant->name."viens de commencer</br>" ;
+        return $this->life= $attaquant->get_force()- $this->robustesse;
+    }
   
 
     
