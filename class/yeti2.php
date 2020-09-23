@@ -19,19 +19,21 @@ class Yetirpg{
     {
         
         
-        $this->name=$name;
+        $this->name=ucfirst($name);
         $this->force= rand(3,10);
         $this->robustesse=rand((10-$this->force - 3),7);
         $this->life_max= rand((50-$this->robustesse*2),(100+$this->force*2));
         $this->life= $this->life_max;
         //$this->status= $this->set_status();
-        echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène</br>";
+        echo "un nouveau yéti ".ucfirst($this->name). " viens d'arriver dans l'arène
+        il possede une santé de ".$this->get_life()."</br>";
+        
         array_push(self::$allYeti,$this);
         
     }
     public function set_life($newlife){
         $this->life=$newlife;
-        echo "le yéti".ucfirst($this->get_name())." vient de passer a ".$this->life."</br>";
+        echo "le yéti".ucfirst($this->get_name())." vient de passer a ".$this->get_life()."</br>";
       
         if($this->get_alive() == self::DIE){
             echo "Le Yéti" . ucfirst($this->get_name()) . " à malheureusement succomber</br>";
@@ -64,7 +66,7 @@ class Yetirpg{
         {
             return $this->status= self::GOOD_HEALTH;
         }
-        elseif($this->get_life() <= ($this->life_max * (60 / 100))or $this->get_life >= $this->life_max * (30/ 100))
+        elseif($this->get_life() <= ($this->life_max * (60 / 100))or $this->get_life() >= $this->life_max * (30/ 100))
         {
             return $this->status = self::MEDIUM_HEALTH;
         }
@@ -111,18 +113,18 @@ class Yetirpg{
         {
         $yetialive = array();
          
-            echo "<ul>";
+            //echo "<ul>";
             foreach(self::$allYeti as $yeti)
             {
           
                 if($yeti->life != self::DIE){
-                echo "<li>" .$yeti->name."</li>";
+               // echo "<li>" .$yeti->name."</li>";
                
                 array_push($yetialive,$yeti);
                     
             }
             
-            echo'</ul>';
+            //echo'</ul>';
         }
 
         return $yetialive;
